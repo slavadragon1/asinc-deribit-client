@@ -19,7 +19,7 @@ async def homepage():
     return {'methods':
        ['/tickers?ticker=',
         '/last_price?ticker=' ,
-        '/ticker_by_date&ticker=']}
+        '/ticker_by_time&ticker=']}
 
 
 @app.get('/tickers')
@@ -46,3 +46,14 @@ async def get_last_price(ticker: str = Query(...)):
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail='Database error') from e
 
+@app.get('/ticker_by_time')
+def get_price_by_time(ticker: str = Query(...), timestamp: int = Query(...)):
+    try:
+        ticker_data = session.query(Ticker).filter_by(ticker=ticker, timestamp=timestamp).first()
+        if not ticker_data:
+            raise HTTPException(status_code=404, detail='Ticker not found')
+
+        return {'ticker': ticker_data.ticker, 'price': ticker_data.price, 'timestamp': ticker_data.timestamp}
+
+    except SQLAlchemyError as e:
+        raise HTTPException(status_code=500, detail='Database error') from e
