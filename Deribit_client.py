@@ -1,6 +1,6 @@
 import asyncio
 import aiohttp
-from sqlalchemy import create_engine, Column, Integer, String, Float, BigInteger, DateTime, Null
+from sqlalchemy import create_engine, Column, Integer, String, Float, BigInteger
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 
