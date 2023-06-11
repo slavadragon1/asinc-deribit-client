@@ -44,4 +44,4 @@ async def get_prices():
             await asyncio.sleep(60)
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(get_prices())
+# loop.run_until_complete(get_prices())
