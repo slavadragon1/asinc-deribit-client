@@ -15,7 +15,6 @@ session = Session()
 
 @app.get("/")
 async def homepage():
-    print("OK")
     return {'methods':
        ['/tickers?ticker=',
         '/last_price?ticker=' ,
