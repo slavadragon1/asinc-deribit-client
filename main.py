@@ -40,7 +40,7 @@ async def get_prices():
                 timestamp = ticker_data['usOut']
 
                 await save_ticker(session_db, symbol, price, timestamp)
-                print(session, symbol, price, timestamp)
+                print(symbol, price, timestamp)
             await asyncio.sleep(60)
 
 if __name__ == "__main__":

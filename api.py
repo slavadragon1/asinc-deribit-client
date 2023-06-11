@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 
-from Deribit_client import Ticker
+from main import Ticker
 
 
 app = FastAPI()
