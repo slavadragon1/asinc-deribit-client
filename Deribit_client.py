@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, BigInteger
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 
-Base = declarative_base()
+Base = declarative_base() # init db
 
 class Ticker(Base):
     __tablename__ = 'tickers'
@@ -43,5 +43,6 @@ async def get_prices():
                 print(session, symbol, price, timestamp)
             await asyncio.sleep(60)
 
-loop = asyncio.get_event_loop()
-# loop.run_until_complete(get_prices())
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(get_prices())
