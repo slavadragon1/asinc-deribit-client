@@ -20,7 +20,7 @@ async def homepage():
         '/last_price?ticker=' ,
         '/ticker_by_time&ticker=']}
 
-
+# Получение всех сохраненных данных по указанной валюте 
 @app.get('/tickers')
 async def get_all_tickers(ticker: str = Query(...)):
     try:
@@ -33,7 +33,9 @@ async def get_all_tickers(ticker: str = Query(...)):
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail='Database error') from e
 
-@app.get('/last_price')
+
+# Получение последней цены валюты
+@app.get('/last_price') 
 async def get_last_price(ticker: str = Query(...)):
     try:
         last_ticker = session.query(Ticker).filter_by(ticker=ticker).order_by(Ticker.timestamp.desc()).first()
@@ -45,6 +47,8 @@ async def get_last_price(ticker: str = Query(...)):
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail='Database error') from e
 
+
+# Получение цены валюты с фильтром по дате
 @app.get('/ticker_by_time')
 def get_price_by_time(ticker: str = Query(...), timestamp: int = Query(...)):
     try:
