@@ -30,7 +30,7 @@ async def get_prices():
     engine = create_engine('postgresql://postgres:root@localhost:5432/Deribit_client')
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
-    session1 = Session()
+    session_db = Session()
 
     async with aiohttp.ClientSession() as session:
         while True:
@@ -39,7 +39,7 @@ async def get_prices():
                 price = ticker_data['result']['index_price']
                 timestamp = ticker_data['usOut']
 
-                await save_ticker(session1, symbol, price, timestamp)
+                await save_ticker(session_db, symbol, price, timestamp)
                 print(session, symbol, price, timestamp)
             await asyncio.sleep(60)
 
